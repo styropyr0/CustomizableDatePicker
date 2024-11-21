@@ -34,6 +34,7 @@ object CustomCalendarResources {
     internal var monthSwitchIconLeft = R.drawable.ic_arrow_left
     internal var monthSwitchIconRight = R.drawable.ic_arrow_right
     internal var yearSwitchIcon = R.drawable.ic_arrow_down
+    internal var gestureMonthSwitching = true
 
     fun setCalendarDayHighlightBackground(backgroundDrawable: Int): CustomCalendarResources {
         dayHighlightBackground = backgroundDrawable
@@ -144,4 +145,10 @@ object CustomCalendarResources {
         yearSwitchIcon = drawable
         return this
     }
+
+    fun useGestureForSwitchingMonths(state: Boolean): CustomCalendarResources {
+        gestureMonthSwitching = state
+        return this
+    }
+
 }

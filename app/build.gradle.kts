@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.matrix.testproject"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.matrix.testproject"

@@ -27,6 +27,7 @@ import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.s
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.selectorTextColor
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.topBarBackgroundColor
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.font
+import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.gestureMonthSwitching
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.topBarDaysBackground
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.topBarDefaultDayColor
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.topBarSundayColor
@@ -126,16 +127,18 @@ class CustomizableDatePicker {
             selectedDate = CalendarAdapter.getSelected()
             todo()
         }
-        val gestureDetector = GestureDetector(context, SwipeDetector(
-            onSwipeLeft = { switchMonth(popup.findViewById<ImageView>(R.id.month_prev)) },
-            onSwipeRight = { switchMonth(popup.findViewById<ImageView>(R.id.month_next)) }
-        ))
+        if (gestureMonthSwitching) {
+            val gestureDetector = GestureDetector(context, SwipeDetector(
+                onSwipeLeft = { switchMonth(popup.findViewById<ImageView>(R.id.month_prev)) },
+                onSwipeRight = { switchMonth(popup.findViewById<ImageView>(R.id.month_next)) }
+            ))
 
-        popup.findViewById<GridView>(R.id.calendarHead).setBackgroundColor(topBarBackgroundColor)
-        popup.findViewById<GridView>(R.id.calendar).setOnTouchListener { _, event ->
-            gestureDetector.onTouchEvent(event)
-            true
+            popup.findViewById<GridView>(R.id.calendar).setOnTouchListener { _, event ->
+                gestureDetector.onTouchEvent(event)
+                true
+            }
         }
+        popup.findViewById<GridView>(R.id.calendarHead).setBackgroundColor(topBarBackgroundColor)
         if (daysBarVisibility == View.VISIBLE) {
             popup.findViewById<GridView>(R.id.calendarHead).adapter = object : BaseAdapter() {
 

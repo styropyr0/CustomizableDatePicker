@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.matrix.styro_custom_date_picker"
-    compileSdk = 35
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 30
