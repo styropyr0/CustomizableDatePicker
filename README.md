@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
         }
         // Access the selected date
         val selectedDate = datePicker.getSelectedDate() // Returns the selected date as a string in dd-MM-yyyy format
-        println("Selected Date: $selectedDate") // Print or use the selected date
+        Log.d("Selected Date: $selectedDate") // Print or use the selected date
     }
 }
 ```
