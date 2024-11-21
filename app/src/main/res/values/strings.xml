@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">TestProject</string>
+    <string name="open_date_picker">Open Date Picker</string>
+</resources>

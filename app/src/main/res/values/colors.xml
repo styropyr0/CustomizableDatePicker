@@ -1,0 +1,7 @@
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="your_custom_color">#FF6200EE</color>
+    <color name="your_custom_color_variant">#FF3700B3</color>
+    <color name="your_custom_on_primary_color">#FFFFFF</color>
+</resources>
