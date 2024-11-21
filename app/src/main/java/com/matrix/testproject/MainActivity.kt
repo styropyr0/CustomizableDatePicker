@@ -24,9 +24,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun showDatePicker(v: View) {
-        CustomCalendarResources.setCalendarDaysHighlightTextColor(Color.BLUE)
-            .setDaysBarVisibility(View.GONE)
+        CustomCalendarResources.setCalendarDaysHighlightTextColor(Color.RED)
+            .setDaysBarVisibility(View.VISIBLE)
             .setButtonDrawable(R.drawable.bg)
+
         val cv = CustomizableDatePicker()
         cv.show(
             this,

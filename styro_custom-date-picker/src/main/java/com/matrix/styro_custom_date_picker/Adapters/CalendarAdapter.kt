@@ -15,6 +15,7 @@ import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.c
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.dayBackgroundDefault
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.font
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.dayHighlightBackground
+import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.setCalendarDayHighlightBackground
 import com.matrix.styro_custom_date_picker.R
 import java.util.Calendar
 
@@ -63,7 +64,7 @@ class CalendarAdapter(
                     selectedView = it as TextView
                     selectedView.setTextColor(calendarDaysHighlightTextColor)
                     highlight = it.text as String
-                    it.setBackgroundResource(R.drawable.calendar_highlight)
+                    it.setBackgroundResource(dayHighlightBackground)
                     selected[0] = Integer.valueOf(it.text.toString())
                     setCalendar()
 
@@ -77,7 +78,7 @@ class CalendarAdapter(
                     selectedView = it as TextView
                     selectedView.setTextColor(calendarDaysHighlightTextColor)
                     highlight = it.text as String
-                    it.setBackgroundResource(R.drawable.calendar_highlight)
+                    it.setBackgroundResource(dayHighlightBackground)
                     selected[0] = Integer.valueOf(it.text.toString())
                     setCalendar()
                 }
