@@ -50,7 +50,32 @@ afterEvaluate {
                 groupId = "com.github.styropyr0"
                 artifactId = "styro-custom-date-picker"
                 version = "1.0.0"
+
+                pom {
+                    name.set("Customizable Date Picker")
+                    description.set("A custom date picker library for Android.")
+                    url.set("https://github.com/styropyr0/CustomizableDatePicker")
+                    licenses {
+                        license {
+                            name.set("Apache License 2.0")
+                            url.set("https://opensource.org/licenses/Apache-2.0")
+                        }
+                    }
+                    developers {
+                        developer {
+                            id.set("styropyr0")
+                            name.set("Saurav Sajeev")
+                            email.set("sauravsajeev202@gmail.com")
+                        }
+                    }
+                    scm {
+                        connection.set("scm:git:github.com/styropyr0/CustomizableDatePicker.git")
+                        developerConnection.set("scm:git:ssh://github.com/styropyr0/CustomizableDatePicker.git")
+                        url.set("https://github.com/styropyr0/CustomizableDatePicker")
+                    }
+                }
             }
+
         }
     }
 }
