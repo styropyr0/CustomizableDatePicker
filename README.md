@@ -1,6 +1,6 @@
 # Customizable Date Picker
 
-`Styro Custom Date Picker` is a fully customizable date picker component for Android that offers a variety of customization options and a simple API for displaying a date picker with a wide range of features.
+This is a fully customizable date picker component for Android that offers a variety of customization options and a simple API for displaying a date picker with a wide range of features.
 
 ## Features
 
