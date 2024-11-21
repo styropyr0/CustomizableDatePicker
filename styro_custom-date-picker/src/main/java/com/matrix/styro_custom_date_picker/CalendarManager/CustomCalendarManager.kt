@@ -28,7 +28,7 @@ import java.util.Locale
  * @author Saurav Sajeev
  **/
 
-class CalendarManager(
+internal class CalendarManager(
     private val month: TextView,
     private val year: TextView,
     private val date: String = DateManager.today(),
@@ -114,10 +114,10 @@ object DateManager {
 
     /** Converts string into array of date values
      * @param date String date which needs to be converted**/
-    fun getDateArray(date: String): List<Int> = date.split("-").map { Integer.valueOf(it) }
+    internal fun getDateArray(date: String): List<Int> = date.split("-").map { Integer.valueOf(it) }
 
     /**Handles date selection*/
-    fun adjustDate(
+    internal fun adjustDate(
         context: Context,
         currentDate: MutableList<Int>,
         view: View,
@@ -221,7 +221,7 @@ object DateManager {
         popupWindow.showAsDropDown(view, popupDimension / 2 - 35, 10)
     }
 
-    fun setDate(
+    internal fun setDate(
         context: Context,
         currentDate: List<Int>,
         popupView: View,
@@ -250,6 +250,6 @@ object DateManager {
 
 }
 
-object SetDates {
+internal object SetDates {
     lateinit var currentDate: List<Int>
 }

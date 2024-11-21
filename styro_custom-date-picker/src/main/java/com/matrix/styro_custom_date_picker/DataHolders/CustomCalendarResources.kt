@@ -4,6 +4,13 @@ import android.graphics.Color
 import android.view.View
 import com.matrix.styro_custom_date_picker.R
 
+/**
+ * Change the appearance of the date picker by setting values into the respective parameters.
+ *
+ * Author: Saurav Sajeev
+ * Date: 2024-11-20
+ */
+
 object CustomCalendarResources {
     internal var dayHighlightBackground: Int = R.drawable.calendar_highlight
     internal var dayBackgroundDefault: Int = R.drawable.calendar_click

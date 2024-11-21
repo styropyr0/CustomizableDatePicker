@@ -15,7 +15,6 @@ import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.c
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.dayBackgroundDefault
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.font
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.dayHighlightBackground
-import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.setCalendarDayHighlightBackground
 import com.matrix.styro_custom_date_picker.R
 import java.util.Calendar
 
@@ -24,7 +23,7 @@ import java.util.Calendar
  * @author Saurav Sajeev
  */
 
-class CalendarAdapter(
+internal class CalendarAdapter(
     private val context: Context,
     private val calendarSet: CalendarSet,
     private var highlight: String,
@@ -125,7 +124,7 @@ class CalendarAdapter(
     }
 
     /** Returns the selected date from the calendar */
-    companion object {
+    internal companion object {
         private var selected = mutableListOf<Int>()
         private var calendar: Calendar = Calendar.getInstance()
         fun getSelected(): String {
@@ -139,7 +138,7 @@ class CalendarAdapter(
             calendar.set(Calendar.DAY_OF_MONTH, selected[0])
         }
 
-        fun getCalendar() = calendar
+        internal fun getCalendar() = calendar
     }
 
 }

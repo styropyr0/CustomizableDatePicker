@@ -1,15 +1,15 @@
 package com.matrix.styro_custom_date_picker
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.view.GestureDetector
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.Button
 import android.widget.GridView
 import android.widget.ImageView
 import android.widget.LinearLayout
-import androidx.annotation.*
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -31,6 +31,7 @@ import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.t
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.topBarDefaultDayColor
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.topBarSundayColor
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.yearSwitchIcon
+import com.matrix.styro_custom_date_picker.Utils.SwipeDetector
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -56,6 +57,7 @@ class CustomizableDatePicker {
      * @param callback The function which you might want to get executed after selecting the date (Optional)
      * **/
 
+    @SuppressLint("ClickableViewAccessibility")
     fun show(
         context: Context,
         date: String,
@@ -124,7 +126,16 @@ class CustomizableDatePicker {
             selectedDate = CalendarAdapter.getSelected()
             todo()
         }
+        val gestureDetector = GestureDetector(context, SwipeDetector(
+            onSwipeLeft = { switchMonth(popup.findViewById<ImageView>(R.id.month_prev)) },
+            onSwipeRight = { switchMonth(popup.findViewById<ImageView>(R.id.month_next)) }
+        ))
+
         popup.findViewById<GridView>(R.id.calendarHead).setBackgroundColor(topBarBackgroundColor)
+        popup.findViewById<GridView>(R.id.calendar).setOnTouchListener { _, event ->
+            gestureDetector.onTouchEvent(event)
+            true
+        }
         if (daysBarVisibility == View.VISIBLE) {
             popup.findViewById<GridView>(R.id.calendarHead).adapter = object : BaseAdapter() {
 
@@ -161,7 +172,8 @@ class CustomizableDatePicker {
     private fun switchMonth(v: View) {
         val currentDate: MutableList<Int> =
             DateManager.getDateArray(
-                CalendarAdapter.getSelected()).toMutableList()
+                CalendarAdapter.getSelected()
+            ).toMutableList()
         c.let { DateManager.adjustDate(it, currentDate, v, popup, upperLimit) }
     }
 
