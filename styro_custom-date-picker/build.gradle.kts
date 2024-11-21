@@ -1,11 +1,12 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    id("maven-publish")
 }
 
 android {
     namespace = "com.matrix.styro_custom_date_picker"
-    compileSdk = 35
+    compileSdk = 30
 
     defaultConfig {
         minSdk = 30
@@ -39,4 +40,17 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components["release"])
+                groupId = "com.github.styropyr0"
+                artifactId = "styro-custom-date-picker"
+                version = "1.0"
+            }
+        }
+    }
 }
