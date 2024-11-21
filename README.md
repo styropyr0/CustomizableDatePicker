@@ -22,7 +22,9 @@ dependencies {
 }
 ```
 
-```gradle.ktx
+or for gradle.kts
+
+```gradle
 dependencies {
     implementation("com.matrix:styro_custom_date_picker:1.0.2")
 }
