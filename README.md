@@ -16,7 +16,7 @@ To include the **Styro Custom Date Picker** in your project, add the following t
 
 ```gradle
 dependencies {
-    implementation 'com.matrix:styro_custom_date_picker:1.0.0'
+    implementation 'com.matrix:styro_custom_date_picker:1.0.2'
 }
 ```
 
