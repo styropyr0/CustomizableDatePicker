@@ -1,6 +1,8 @@
 # Customizable Date Picker
-
+#### Latest version: 1.0.2
 This is a fully customizable date picker component for Android that offers a variety of customization options and a simple API for displaying a date picker with a wide range of features.
+
+Please note that this library requires minSdk of 30.
 
 ## Features
 
@@ -17,6 +19,12 @@ To include the **Styro Custom Date Picker** in your project, add the following t
 ```gradle
 dependencies {
     implementation 'com.matrix:styro_custom_date_picker:1.0.2'
+}
+```
+
+```gradle.ktx
+dependencies {
+    implementation("com.matrix:styro_custom_date_picker:1.0.2")
 }
 ```
 
