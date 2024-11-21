@@ -6,7 +6,7 @@ plugins {
 
 android {
     namespace = "com.matrix.styro_custom_date_picker"
-    compileSdk = 30
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 30
@@ -28,7 +28,7 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "1.8"
     }
 }
 
