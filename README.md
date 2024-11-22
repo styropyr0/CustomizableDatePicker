@@ -113,101 +113,171 @@ class MainActivity : AppCompatActivity() {
 
 You can customize the appearance and behavior of the `CustomizableDatePicker` using the `CustomCalendarResources` singleton. Below are the available customization options:
 
-#### Calendar and Date Appearance
+### Calendar and Date Appearance
 
-- **Highlight Date Background**:
+- **Highlight Date Background**  
+  Set the drawable for highlighting selected dates.  
   ```kotlin
   CustomCalendarResources.setCalendarDayHighlightBackground(R.drawable.highlight_background)
   ```
 
-- **Default Date Background**:
+- **Default Date Background**  
+  Define the default background for calendar dates.  
   ```kotlin
   CustomCalendarResources.setCalendarDayBackgroundDefault(R.drawable.default_background)
   ```
 
-- **Text Color for Calendar Days**:
+- **Text Color for Calendar Days**  
+  Set the text color for all calendar dates.  
   ```kotlin
   CustomCalendarResources.setCalendarDaysTextColor(Color.BLACK)
   ```
 
-- **Text Color for Disabled Days**:
+- **Text Color for Disabled Days**  
+  Define the text color for disabled dates.  
   ```kotlin
   CustomCalendarResources.setCalendarDaysDisabledTextColor(Color.GRAY)
   ```
 
-- **Text Color for Highlighted Days**:
+- **Text Color for Highlighted Days**  
+  Specify the text color for highlighted calendar dates.  
   ```kotlin
   CustomCalendarResources.setCalendarDaysHighlightTextColor(Color.RED)
   ```
 
-- **Font**:
+- **Font**  
+  Change the font used for all calendar text.  
   ```kotlin
   CustomCalendarResources.setFont(R.font.dm_sans_medium)
   ```
 
-#### Top Bar Customization
+---
 
-- **Top Bar Background Color**:
+### Top Bar Customization
+
+- **Top Bar Background Color**  
+  Customize the background color of the top bar.  
   ```kotlin
   CustomCalendarResources.setTopBarBackgroundColor(Color.WHITE)
   ```
 
-- **Sunday Day Color in Top Bar**:
+- **Sunday Day Color in Top Bar**  
+  Define the color for Sundays in the top bar.  
   ```kotlin
   CustomCalendarResources.setTopBarSundayColor(Color.RED)
   ```
 
-- **Default Day Color in Top Bar**:
+- **Default Day Color in Top Bar**  
+  Specify the default color for other weekdays in the top bar.  
   ```kotlin
   CustomCalendarResources.setTopBarDefaultDayColor(Color.parseColor("#848487"))
   ```
 
-#### Button Customization
+---
 
-- **Button Background**:
+### Button Customization
+
+- **Button Background**  
+  Set the background drawable for buttons.  
   ```kotlin
   CustomCalendarResources.setButtonDrawable(R.drawable.button_background)
   ```
 
-- **Button Text Color**:
+- **Button Text Color**  
+  Define the text color for buttons.  
   ```kotlin
   CustomCalendarResources.setButtonTextColor(Color.WHITE)
   ```
 
-#### Month & Year Navigation
+---
 
-- **Year Dropdown Background**:
+### Month & Year Navigation
+
+- **Year Dropdown Background**  
+  Customize the background of the year dropdown menu.  
   ```kotlin
   CustomCalendarResources.setYearDropDownBackground(R.drawable.year_dropdown_background)
   ```
 
-- **Year Dropdown Text Color**:
+- **Year Dropdown Text Color**  
+  Specify the text color for the year dropdown menu.  
   ```kotlin
   CustomCalendarResources.setYearDropdownTextColor(Color.parseColor("#474747"))
   ```
 
-- **Month Switch Icons (Left and Right)**:
+- **Month Switch Icons (Left and Right)**  
+  Change the icons for navigating months.  
   ```kotlin
   CustomCalendarResources.setMonthSwitchIconLeft(R.drawable.ic_arrow_left)
   CustomCalendarResources.setMonthSwitchIconRight(R.drawable.ic_arrow_right)
   ```
 
-- **Year Switch Icon**:
+- **Year Switch Icon**  
+  Set the icon for switching years.  
   ```kotlin
   CustomCalendarResources.setYearSwitchIcon(R.drawable.ic_arrow_down)
   ```
 
-#### Popup and Gesture Support
+---
 
-- **Popup Background**:
+### Popup and Gesture Support
+
+- **Popup Background**  
+  Customize the background of popups.  
   ```kotlin
   CustomCalendarResources.setPopupBackground(R.drawable.popup_background)
   ```
 
-- **Enable Gesture-based Month Switching**:
+- **Enable Gesture-based Month Switching**  
+  Enable or disable gestures for switching months.  
   ```kotlin
   CustomCalendarResources.useGestureForSwitchingMonths(true)
   ```
+
+---
+
+### Font and Size Adjustments
+
+- **Calendar Font Size**  
+  Adjust the font size for calendar text.  
+  ```kotlin
+  CustomCalendarResources.setCalendarFontSize(14f)
+  ```
+
+- **Year Dropdown Font Size**  
+  Customize the font size for the year dropdown menu.  
+  ```kotlin
+  CustomCalendarResources.setYearDropdownFontSize(12f)
+  ```
+
+- **Selector Font Size**  
+  Define the font size for month/year selector.  
+  ```kotlin
+  CustomCalendarResources.setSelectorFontSize(16f)
+  ```
+
+- **Button Font Size**  
+  Adjust the font size for button text.  
+  ```kotlin
+  CustomCalendarResources.setButtonFontSize(14f)
+  ```
+
+---
+
+## Additional Customization
+
+- **Days Bar Visibility**  
+  Show or hide the days bar at the top of the calendar.  
+  ```kotlin
+  CustomCalendarResources.setDaysBarVisibility(View.VISIBLE)
+  ```
+
+- **Top Bar Days Background**  
+  Set a background drawable for the top bar days.  
+  ```kotlin
+  CustomCalendarResources.setTopBarDaysBackground(R.drawable.days_background)
+  ```
+
 
 ### 3. The `show()` Method
 
