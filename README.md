@@ -2,7 +2,10 @@
 #### Latest version: 1.0
 This is a fully customizable date picker component for Android that offers a variety of customization options and a simple API for displaying a date picker with a wide range of features.
 
-Please note that this library requires minSdk of 28.
+Please note that this library requires Java Version 11 at the least, and
+```gradle
+minSdk = 28
+```
 
 ## Features
 
