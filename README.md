@@ -29,7 +29,7 @@ dependencies {
     implementation("com.matrix:styro_custom_date_picker:1.0.2")
 }
 ```
-and add the following to your `project:build.gradle` file:
+and add the following to your `project:build.gradle` file (ignore if already included):
 
 ```gradle
 dependencyResolutionManagement {
