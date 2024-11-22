@@ -4,7 +4,7 @@ This is a fully customizable date picker component for Android that offers a var
 
 Please note that this library requires Java Version 11 at the least, and
 ```gradle
-minSdk = 28
+minSdk = 28  //or above
 ```
 
 ## Features
