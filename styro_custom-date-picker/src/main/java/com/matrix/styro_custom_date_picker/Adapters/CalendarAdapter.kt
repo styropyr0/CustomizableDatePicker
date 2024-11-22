@@ -12,6 +12,7 @@ import com.matrix.styro_custom_date_picker.DataHolders.CalendarSet
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.calendarDaysDisabledTextColor
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.calendarDaysHighlightTextColor
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.calendarDaysTextColor
+import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.calendarFontSize
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.dayBackgroundDefault
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.font
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.dayHighlightBackground
@@ -47,6 +48,8 @@ internal class CalendarAdapter(
         val view = p1 ?: LayoutInflater.from(context).inflate(R.layout.day, p2, false)
         val dayText =
             view.findViewById<LinearLayout>(R.id.day_lly).findViewById<TextView>(R.id.dayText)
+        if (calendarFontSize > 0)
+            dayText.textSize = calendarFontSize
         val today = upperLimit.split("-").map { Integer.valueOf(it) }
         var last = calendarSet.lastDayOfMonth
         dayText.typeface = ResourcesCompat.getFont(context, font)

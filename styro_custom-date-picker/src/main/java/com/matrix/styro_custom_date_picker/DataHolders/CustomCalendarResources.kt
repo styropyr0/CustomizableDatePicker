@@ -19,8 +19,8 @@ object CustomCalendarResources {
     internal var selectorBackground: Int = R.drawable.calendar_highlight
     internal var selectorTextColor: Int = Color.parseColor("#474747")
     internal var font: Int = R.font.dm_sans_medium
-    internal var calendarBackgroundColor: Int = Color.WHITE
-    internal var topBarBackgroundColor: Int = Color.WHITE
+    internal var calendarBackgroundColor: Int = Color.TRANSPARENT
+    internal var topBarBackgroundColor: Int = Color.TRANSPARENT
     internal var buttonDrawable: Int = R.drawable.button_bg
     internal var buttonTextColor: Int = Color.WHITE
     internal var daysBarVisibility = View.VISIBLE
@@ -35,6 +35,10 @@ object CustomCalendarResources {
     internal var monthSwitchIconRight = R.drawable.ic_arrow_right
     internal var yearSwitchIcon = R.drawable.ic_arrow_down
     internal var gestureMonthSwitching = true
+    internal var calendarFontSize: Float = 0f
+    internal var yearDropdownfontSize: Float = 0f
+    internal var selectorFontSize: Float = 0f
+    internal var buttonFontSize: Float = 0f
 
     fun setCalendarDayHighlightBackground(backgroundDrawable: Int): CustomCalendarResources {
         dayHighlightBackground = backgroundDrawable
@@ -148,6 +152,26 @@ object CustomCalendarResources {
 
     fun useGestureForSwitchingMonths(state: Boolean): CustomCalendarResources {
         gestureMonthSwitching = state
+        return this
+    }
+
+    fun setCalendarFontSize(size: Float): CustomCalendarResources {
+        calendarFontSize = size
+        return this
+    }
+
+    fun setYearDropdownFontSize(size: Float): CustomCalendarResources {
+        yearDropdownfontSize = size
+        return this
+    }
+
+    fun setSelectorFontSize(size: Float): CustomCalendarResources {
+        selectorFontSize = size
+        return this
+    }
+
+    fun setButtonFontSize(size: Float): CustomCalendarResources {
+        buttonFontSize = size
         return this
     }
 

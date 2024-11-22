@@ -13,8 +13,8 @@ internal class SwipeDetector(
     private val onSwipeRight: () -> Unit
 ) : GestureDetector.SimpleOnGestureListener() {
 
-    private val SWIPE_THRESHOLD = 40f
-    private val SWIPE_VELOCITY_THRESHOLD = 40f
+    private val SWIPE_THRESHOLD = 100f
+    private val SWIPE_VELOCITY_THRESHOLD = 100f
 
     override fun onFling(
         e1: MotionEvent?,

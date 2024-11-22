@@ -12,9 +12,11 @@ import com.matrix.styro_custom_date_picker.Adapters.CalendarAdapter
 import com.matrix.styro_custom_date_picker.CalendarManager.DateManager.getDateArray
 import com.matrix.styro_custom_date_picker.DataHolders.CalendarSet
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.calendarBackgroundColor
+import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.calendarFontSize
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.yearDropDownBackground
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.yearDropdownTextColor
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.font
+import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.yearDropdownfontSize
 import com.matrix.styro_custom_date_picker.R
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -202,6 +204,8 @@ object DateManager {
             itemText.typeface = ResourcesCompat.getFont(context, font)
             itemText.setTextColor(yearDropdownTextColor)
             itemText.text = item.toString()
+            if (yearDropdownfontSize > 0)
+                itemText.textSize = yearDropdownfontSize
             itemView.setOnClickListener {
                 popupView.findViewById<TextView>(R.id.year_text).text = itemText.text
                 currentDate[2] = Integer.valueOf(item)

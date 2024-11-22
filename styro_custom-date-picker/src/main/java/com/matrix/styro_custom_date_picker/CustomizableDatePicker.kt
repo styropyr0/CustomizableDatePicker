@@ -18,7 +18,9 @@ import com.matrix.styro_custom_date_picker.CalendarManager.DateManager
 import com.matrix.styro_custom_date_picker.CalendarManager.DateManager.today
 import com.matrix.styro_custom_date_picker.CalendarManager.SetDates.currentDate
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.buttonDrawable
+import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.buttonFontSize
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.buttonTextColor
+import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.calendarFontSize
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.daysBarVisibility
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.monthSwitchIconLeft
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.monthSwitchIconRight
@@ -28,6 +30,7 @@ import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.s
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.topBarBackgroundColor
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.font
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.gestureMonthSwitching
+import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.selectorFontSize
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.topBarDaysBackground
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.topBarDefaultDayColor
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.topBarSundayColor
@@ -78,8 +81,13 @@ class CustomizableDatePicker {
         popup.findViewById<LinearLayout>(R.id.year).setBackgroundResource(
             selectorBackground
         )
+
         popup.findViewById<TextView>(R.id.month).setTextColor(selectorTextColor)
         popup.findViewById<TextView>(R.id.year_text).setTextColor(selectorTextColor)
+        if (selectorFontSize > 0) {
+            popup.findViewById<TextView>(R.id.month).textSize = selectorFontSize
+            popup.findViewById<TextView>(R.id.year_text).textSize = selectorFontSize
+        }
 
         popup.findViewById<ImageView>(R.id.month_next).setImageResource(monthSwitchIconRight)
         popup.findViewById<ImageView>(R.id.month_prev).setImageResource(monthSwitchIconLeft)
@@ -110,15 +118,17 @@ class CustomizableDatePicker {
             yearDropdown(it)
         }
 
-        val bottomSheetDialog = BottomSheetDialog(context)
-        bottomSheetDialog.setContentView(popup)
-        bottomSheetDialog.show()
-
         val chooseButton: LinearLayout = popup.findViewById(R.id.calendar_choose)
         val chooseText: TextView = popup.findViewById(R.id.choose_text)
         chooseButton.setBackgroundResource(buttonDrawable)
         chooseText.setTextColor(buttonTextColor)
+        if (buttonFontSize > 0)
+            chooseText.textSize = buttonFontSize * context.resources.displayMetrics.scaledDensity
         chooseText.typeface = defaultFont
+
+        val bottomSheetDialog = BottomSheetDialog(context)
+        bottomSheetDialog.setContentView(popup)
+        bottomSheetDialog.show()
 
         chooseButton.setOnClickListener {
             bottomSheetDialog.dismiss()
@@ -127,6 +137,7 @@ class CustomizableDatePicker {
             selectedDate = CalendarAdapter.getSelected()
             todo()
         }
+
         if (gestureMonthSwitching) {
             val gestureDetector = GestureDetector(context, SwipeDetector(
                 onSwipeLeft = { switchMonth(popup.findViewById<ImageView>(R.id.month_prev)) },
@@ -154,6 +165,8 @@ class CustomizableDatePicker {
                     val view = p1 ?: LayoutInflater.from(context).inflate(R.layout.day, p2, false)
                     val dayText = view.findViewById<LinearLayout>(R.id.day_lly)
                         .findViewById<TextView>(R.id.dayText)
+                    if (calendarFontSize > 0)
+                        dayText.textSize = calendarFontSize
                     dayText.typeface = ResourcesCompat.getFont(context, font)
                     dayText.text = days[p0]
                     if (topBarDaysBackground != 0)
