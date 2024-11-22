@@ -14,7 +14,7 @@ Please note that this library requires minSdk of 30.
 
 ## Installation
 
-To include the **Styro Custom Date Picker** in your project, add the following to your `build.gradle` file:
+To include the **Styro Custom Date Picker** in your project, add the following to your `app:build.gradle` file:
 
 ```gradle
 dependencies {
@@ -22,13 +22,25 @@ dependencies {
 }
 ```
 
-or for gradle.kts
+or for `app:build.gradle.kts`
 
 ```gradle
 dependencies {
     implementation("com.matrix:styro_custom_date_picker:1.0.2")
 }
 ```
+and add the following to your `project:build.gradle` file:
+
+```gradle
+dependencyResolutionManagement {
+		repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+		repositories {
+			mavenCentral()
+			maven { url 'https://jitpack.io' }
+		}
+	}
+```
+
 
 ## Usage
 
