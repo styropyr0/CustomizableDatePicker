@@ -25,7 +25,7 @@ dependencies {
 
 or for `app:build.gradle.kts`
 
-```gradle
+```kotlin
 dependencies {
     implementation("com.github.styropyr0:CustomizableDatePicker:1.0.0")
 }
@@ -42,6 +42,17 @@ dependencyResolutionManagement {
 	}
 ```
 
+or for `settings.gradle.kts`
+
+```kotlin
+dependencyResolutionManagement {
+		repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+		repositories {
+			mavenCentral()
+			maven { url = uri("https://jitpack.io") }
+		}
+	}
+```
 
 ## Usage
 
