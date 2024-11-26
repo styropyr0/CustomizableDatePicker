@@ -26,7 +26,7 @@ object CustomCalendarResources {
     internal var daysBarVisibility = View.VISIBLE
     internal var topBarSundayColor = Color.parseColor("#EC3925")
     internal var topBarDefaultDayColor = Color.parseColor("#848487")
-    internal var topBarDaysBackground = 0
+    internal var topBarDaysBackground = R.drawable.top_bar_bg
     internal var calendarDaysTextColor = Color.parseColor("#474747")
     internal var calendarDaysDisabledTextColor: Int = Color.parseColor("#C0C0C2")
     internal var calendarDaysHighlightTextColor = Color.parseColor("#EC3925")

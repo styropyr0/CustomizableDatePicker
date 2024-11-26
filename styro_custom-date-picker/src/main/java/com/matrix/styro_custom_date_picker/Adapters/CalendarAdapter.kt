@@ -56,27 +56,14 @@ internal class CalendarAdapter(
         dayText.text = calendarSet.dates[p0]
 
         dayText.setOnClickListener {
-            try {
-                if (dayText.currentTextColor != selectedView.currentTextColor &&
-                    dayText.currentTextColor != unselColor
-                ) {
+            if (dayText.currentTextColor != selectedView.currentTextColor &&
+                dayText.currentTextColor != unselColor
+            ) {
 
-                    deselectAll()
+                deselectAll()
+                try {
                     selectedView.setTextColor(calendarDaysTextColor)
-                    selectedView = it as TextView
-                    selectedView.setTextColor(calendarDaysHighlightTextColor)
-                    highlight = it.text as String
-                    it.setBackgroundResource(dayHighlightBackground)
-                    selected[0] = Integer.valueOf(it.text.toString())
-                    setCalendar()
-
-                }
-            } catch (_: Exception) {
-
-                if (dayText.currentTextColor != selectedView.currentTextColor &&
-                    dayText.currentTextColor != unselColor
-                ) {
-                    deselectAll()
+                } finally {
                     selectedView = it as TextView
                     selectedView.setTextColor(calendarDaysHighlightTextColor)
                     highlight = it.text as String

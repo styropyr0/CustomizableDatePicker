@@ -169,8 +169,7 @@ class CustomizableDatePicker {
                         dayText.textSize = calendarFontSize
                     dayText.typeface = ResourcesCompat.getFont(context, font)
                     dayText.text = days[p0]
-                    if (topBarDaysBackground != 0)
-                        dayText.setBackgroundResource(topBarDaysBackground)
+                    dayText.setBackgroundResource(topBarDaysBackground)
                     if (p0 == 0)
                         dayText.setTextColor(topBarSundayColor)
                     else
