@@ -1,7 +1,3 @@
-Here's the updated README to include the new customization functions you've added. 
-
----
-
 # Customizable Date Picker
 
 #### Latest version: 1.1
