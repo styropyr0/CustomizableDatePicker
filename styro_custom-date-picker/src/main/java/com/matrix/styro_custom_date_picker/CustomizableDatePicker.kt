@@ -21,7 +21,13 @@ import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.b
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.buttonFontSize
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.buttonTextColor
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.calendarFontSize
+import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.datePickerTitle
+import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.datePickerTitleColor
+import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.datePickerTitleFontSize
+import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.datePickerTitleVisibility
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.daysBarVisibility
+import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.drawerColor
+import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.drawerVisibility
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.monthSwitchIconLeft
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.monthSwitchIconRight
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.popupBackground
@@ -96,6 +102,25 @@ class CustomizableDatePicker {
         val defaultFont = ResourcesCompat.getFont(context, font)
         popup.findViewById<TextView>(R.id.month).typeface = defaultFont
         popup.findViewById<TextView>(R.id.year_text).typeface = defaultFont
+
+
+        val title = popup.findViewById<TextView>(R.id.title)
+        if (datePickerTitleVisibility == View.VISIBLE && datePickerTitle.isNotEmpty()) {
+            title.typeface = defaultFont
+            title.text = datePickerTitle
+            title.visibility = datePickerTitleVisibility
+            title.setTextColor(datePickerTitleColor)
+            if (datePickerTitleFontSize > 0)
+                title.textSize = datePickerTitleFontSize
+        } else title.visibility = View.GONE
+
+        if (drawerVisibility == View.VISIBLE) {
+            val wrappedDrawable =
+                ResourcesCompat.getDrawable(context.resources, R.drawable.slider_bg, null)
+            wrappedDrawable?.setTint(drawerColor)
+            popup.findViewById<ImageView>(R.id.drawer).setImageDrawable(wrappedDrawable)
+        }
+        popup.findViewById<ImageView>(R.id.drawer).visibility = drawerVisibility
 
         var dateL = DateManager.getDateArray(date)
         val upperDateL = DateManager.getDateArray(upperLimit)

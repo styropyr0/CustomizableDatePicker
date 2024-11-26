@@ -39,6 +39,12 @@ object CustomCalendarResources {
     internal var yearDropdownfontSize: Float = 0f
     internal var selectorFontSize: Float = 0f
     internal var buttonFontSize: Float = 0f
+    internal var datePickerTitleFontSize: Float = 0f
+    internal var datePickerTitle: String = ""
+    internal var datePickerTitleVisibility: Int = View.VISIBLE
+    internal var datePickerTitleColor = Color.BLACK
+    internal var drawerColor = Color.parseColor("#C3DBD3D2")
+    internal var drawerVisibility = View.VISIBLE
 
     fun setCalendarDayHighlightBackground(backgroundDrawable: Int): CustomCalendarResources {
         dayHighlightBackground = backgroundDrawable
@@ -172,6 +178,36 @@ object CustomCalendarResources {
 
     fun setButtonFontSize(size: Float): CustomCalendarResources {
         buttonFontSize = size
+        return this
+    }
+
+    fun setTitleFontSize(size: Float): CustomCalendarResources {
+        datePickerTitleFontSize = size
+        return this
+    }
+
+    fun setTitle(title: String): CustomCalendarResources {
+        datePickerTitle = if(title.trim().isNotEmpty()) title else ""
+        return this
+    }
+
+    fun setTitleVisibility(visibility: Int): CustomCalendarResources {
+        datePickerTitleVisibility = visibility
+        return this
+    }
+
+    fun setTitleColor(color: Int): CustomCalendarResources {
+        datePickerTitleColor = color
+        return this
+    }
+
+    fun setDrawerColor(color: Int): CustomCalendarResources {
+        drawerColor = color
+        return this
+    }
+
+    fun setDrawerVisibility(visibility: Int): CustomCalendarResources {
+        drawerVisibility = visibility
         return this
     }
 
