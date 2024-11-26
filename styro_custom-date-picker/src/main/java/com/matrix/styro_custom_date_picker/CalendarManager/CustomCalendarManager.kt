@@ -141,6 +141,15 @@ object DateManager {
                     currentDate[1] > today[1] -> currentDate[1] = 1
                     currentDate[1] < 1 -> currentDate[1] = today[1]
                 }
+                if (currentDate[1] == today[1] && currentDate[0] > today[0])
+                    currentDate[0] = today[0]
+            } else if (currentDate[2] == offset[2]) {
+                when {
+                    currentDate[1] > 12 -> currentDate[1] = offset[1]
+                    currentDate[1] < offset[1] -> currentDate[1] = 12
+                }
+                if (currentDate[1] == offset[1] && currentDate[0] < offset[0])
+                    currentDate[0] = offset[0]
             } else {
                 when {
                     currentDate[1] > 12 -> currentDate[1] = 1
@@ -195,7 +204,7 @@ object DateManager {
         val container: LinearLayout = dropdownView.findViewById(R.id.dropdownContainer)
         val currentYear = Integer.valueOf(upperLimit.split("-")[2])
         val items =
-            Array(currentYear - if (offset[2] == 0) 2000 else offset[2] + 1) { currentYear - it }
+            Array(currentYear - if (offset[2] == 0) 2000 else offset[2] - 1) { currentYear - it }
 
         for (item in items) {
             val itemView =
@@ -215,6 +224,8 @@ object DateManager {
                     currentDate[2] == getDateArray(upperLimit)[2]
                 ) {
                     currentDate[1] = getDateArray(upperLimit)[1]
+                } else if (currentDate[2] == offset[2] && currentDate[1] < offset[1]) {
+                    currentDate[1] = offset[1]
                 }
                 setDate(context, currentDate, popupView, offset, upperLimit)
                 popupWindow.dismiss()
