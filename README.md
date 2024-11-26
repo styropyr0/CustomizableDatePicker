@@ -24,7 +24,14 @@ To include the **Customizable Date Picker** in your project, follow the instruct
 
 ```gradle
 dependencies {
-    implementation 'com.github.styropyr0:CustomizableDatePicker:1.0'
+    implementation 'com.github.styropyr0:CustomizableDatePicker:1.1'
+}
+```
+or for `app:build.gradle.kts`
+
+```kotlin
+dependencies {
+    implementation("com.github.styropyr0:CustomizableDatePicker:1.0")
 }
 ```
 
@@ -39,7 +46,17 @@ dependencyResolutionManagement {
     }
 }
 ```
+or for `settings.gradle.kts`
 
+```kotlin
+dependencyResolutionManagement {
+		repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+		repositories {
+			mavenCentral()
+			maven { url = uri("https://jitpack.io") }
+		}
+	}
+```
 ---
 
 ## Customization Options
