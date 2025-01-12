@@ -39,10 +39,18 @@ internal class CalendarAdapter(
     private var unselColor: Int = 0
 
     override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
+        selected = calendarSet.dateSet.toMutableList()
         if (splitDate(highlight)[0] > calendarSet.lastDayOfMonth)
             highlight =
                 "${calendarSet.lastDayOfMonth}-${calendarSet.dateSet[1]}-${calendarSet.dateSet[2]}"
-        selected = calendarSet.dateSet.toMutableList()
+        else if (splitDate(highlight)[0] > splitDate(upperLimit)[0] &&
+            splitDate(highlight)[1] >= splitDate(upperLimit)[1] &&
+            splitDate(highlight)[2] >= splitDate(upperLimit)[2]
+        ) {
+            highlight = upperLimit
+            selected = splitDate(highlight).toMutableList()
+            calendarSet.dateSet = selected
+        }
         setCalendar()
 
         val view = p1 ?: LayoutInflater.from(context).inflate(R.layout.day, p2, false)
