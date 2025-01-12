@@ -31,7 +31,7 @@ or for `app:build.gradle.kts`
 
 ```kotlin
 dependencies {
-    implementation("com.github.styropyr0:CustomizableDatePicker:1.0")
+    implementation("com.github.styropyr0:CustomizableDatePicker:1.1")
 }
 ```
 
@@ -274,7 +274,7 @@ The `CustomCalendarResources` singleton provides a variety of methods for custom
   CustomCalendarResources.setYearDropdownFontSize(12f)
   ```
   
-### 3. The `show()` Method
+## The `show()` Method
 
 The `show()` method is used to display the date picker with full flexibility. Here's a detailed breakdown of the parameters:
 
@@ -312,7 +312,7 @@ datePicker.show(
 }
 ```
 
-### 4. DateManager Class
+## DateManager Class
 
 The `DateManager` class provides utility functions for managing and formatting dates.
 
