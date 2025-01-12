@@ -12,6 +12,6 @@ internal data class CalendarSet(
     val dates: List<String>,
     val firstDay: Int,
     val lastDayOfMonth: Int,
-    val dateSet: List<Int>,
+    var dateSet: List<Int>,
     val offset: List<Int>
 )
