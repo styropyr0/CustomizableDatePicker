@@ -41,6 +41,7 @@ import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.t
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.topBarDefaultDayColor
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.topBarSundayColor
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.yearSwitchIcon
+import com.matrix.styro_custom_date_picker.Enums.MotionDirection
 import com.matrix.styro_custom_date_picker.Utils.SwipeDetector
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -134,10 +135,10 @@ class CustomizableDatePicker {
         }
         val off = DateManager.getDateArray(offset)
         popup.findViewById<ImageView>(R.id.month_next).setOnClickListener {
-            switchMonth(it)
+            switchMonth(it, MotionDirection.TO_LEFT.ordinal)
         }
         popup.findViewById<ImageView>(R.id.month_prev).setOnClickListener {
-            switchMonth(it)
+            switchMonth(it, MotionDirection.TO_RIGHT.ordinal)
         }
         popup.findViewById<LinearLayout>(R.id.year).setOnClickListener {
             yearDropdown(it)
@@ -165,8 +166,18 @@ class CustomizableDatePicker {
 
         if (gestureMonthSwitching) {
             val gestureDetector = GestureDetector(context, SwipeDetector(
-                onSwipeLeft = { switchMonth(popup.findViewById<ImageView>(R.id.month_prev)) },
-                onSwipeRight = { switchMonth(popup.findViewById<ImageView>(R.id.month_next)) }
+                onSwipeLeft = {
+                    switchMonth(
+                        popup.findViewById<ImageView>(R.id.month_prev),
+                        MotionDirection.TO_RIGHT.ordinal
+                    )
+                },
+                onSwipeRight = {
+                    switchMonth(
+                        popup.findViewById<ImageView>(R.id.month_next),
+                        MotionDirection.TO_LEFT.ordinal
+                    )
+                }
             ))
 
             popup.findViewById<GridView>(R.id.calendar).setOnTouchListener { _, event ->
@@ -205,22 +216,35 @@ class CustomizableDatePicker {
             popup.findViewById<GridView>(R.id.calendarHead).visibility = View.VISIBLE
         } else
             popup.findViewById<GridView>(R.id.calendarHead).visibility = View.GONE
-        DateManager.setDate(context, dateL, popup, off, upperLimit)
+        DateManager.setDate(context, dateL, popup, off, upperLimit, MotionDirection.TO_TOP.ordinal)
     }
 
     /**When user switches month*/
-    private fun switchMonth(v: View) {
+    private fun switchMonth(v: View, motionDirection: Int) {
         val currentDate: MutableList<Int> =
             DateManager.getDateArray(
                 CalendarAdapter.getSelected()
             ).toMutableList()
-        c.let { DateManager.adjustDate(it, currentDate, v, popup, upperLimit) }
+        c.let { DateManager.adjustDate(it, currentDate, v, popup, upperLimit, motionDirection) }
     }
 
     /**When user switches year*/
     private fun yearDropdown(v: View) {
         val currentDate: MutableList<Int> = currentDate.toMutableList()
-        c.let { DateManager.adjustDate(it, currentDate, v, popup, upperLimit) }
+        val prevDate = selectedDate.split('-').map { Integer.valueOf(it) }
+        c.let {
+            DateManager.adjustDate(
+                it,
+                currentDate,
+                v,
+                popup,
+                upperLimit,
+                if (prevDate[2] < currentDate[2])
+                    MotionDirection.TO_TOP.ordinal
+                else
+                    MotionDirection.TO_BOTTOM.ordinal
+            )
+        }
     }
 
     private fun convert(date: String): String {

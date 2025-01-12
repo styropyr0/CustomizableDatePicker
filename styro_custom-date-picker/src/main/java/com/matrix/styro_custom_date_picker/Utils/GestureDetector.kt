@@ -9,13 +9,14 @@ import kotlin.math.abs
  * Author: Saurav Sajeev
  * Date: 2024-11-20
  */
+
 internal class SwipeDetector(
     private val onSwipeLeft: () -> Unit,
     private val onSwipeRight: () -> Unit
 ) : GestureDetector.SimpleOnGestureListener() {
 
-    private val SWIPE_THRESHOLD = 100f
-    private val SWIPE_VELOCITY_THRESHOLD = 100f
+    private val SWIPE_THRESHOLD = 30f
+    private val SWIPE_VELOCITY_THRESHOLD = 30f
 
     override fun onFling(
         e1: MotionEvent?,
@@ -23,19 +24,25 @@ internal class SwipeDetector(
         velocityX: Float,
         velocityY: Float
     ): Boolean {
-        val diffX = e2.x - (e1?.x ?: 0f)
-        val diffY = e2.y - (e1?.y ?: 0f)
+        if (e1 != null) {
+            val diffX = e2.x - e1.x
+            val diffY = e2.y - e1.y
 
-        if (abs(diffX) > abs(diffY)) {
-            if (abs(diffX) > SWIPE_THRESHOLD && abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
-                if (diffX > 0) {
-                    onSwipeLeft()
-                } else {
-                    onSwipeRight()
+            if (abs(diffX) > abs(diffY)) {
+                if (abs(diffX) > SWIPE_THRESHOLD && abs(velocityX) > SWIPE_VELOCITY_THRESHOLD) {
+                    if (diffX > 0) {
+                        onSwipeLeft()
+                    } else {
+                        onSwipeRight()
+                    }
+                    return true
                 }
-                return true
             }
         }
         return false
+    }
+
+    override fun onDown(e: MotionEvent): Boolean {
+        return true
     }
 }

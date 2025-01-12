@@ -1,8 +1,16 @@
 package com.matrix.styro_custom_date_picker.CalendarManager;
 
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.view.animation.AnticipateInterpolator
+import android.view.animation.AnticipateOvershootInterpolator
+import android.view.animation.BounceInterpolator
+import android.view.animation.DecelerateInterpolator
+import android.view.animation.OvershootInterpolator
 import android.widget.GridView
 import android.widget.LinearLayout
 import android.widget.PopupWindow
@@ -12,11 +20,11 @@ import com.matrix.styro_custom_date_picker.Adapters.CalendarAdapter
 import com.matrix.styro_custom_date_picker.CalendarManager.DateManager.getDateArray
 import com.matrix.styro_custom_date_picker.DataHolders.CalendarSet
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.calendarBackgroundColor
-import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.calendarFontSize
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.yearDropDownBackground
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.yearDropdownTextColor
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.font
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.yearDropdownfontSize
+import com.matrix.styro_custom_date_picker.Enums.MotionDirection
 import com.matrix.styro_custom_date_picker.R
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -124,7 +132,8 @@ object DateManager {
         currentDate: MutableList<Int>,
         view: View,
         popupView: View,
-        upperLimit: String
+        upperLimit: String,
+        motionDirection: Int
     ) {
         if (view == popupView.findViewById(R.id.year))
             setUpYearSelection(context, currentDate, view, popupView, upperLimit)
@@ -170,15 +179,15 @@ object DateManager {
                         currentDate[1] <= today[1]) ||
                 currentDate[2] < today[2]
             ) {
-                setDate(context, currentDate, popupView, offset, upperLimit)
+                setDate(context, currentDate, popupView, offset, upperLimit, motionDirection)
             } else if (currentDate[1] == 12) {
                 currentDate[1] = today[1]
-                setDate(context, currentDate, popupView, offset, upperLimit)
+                setDate(context, currentDate, popupView, offset, upperLimit, motionDirection)
             } else {
                 currentDate[1] = 1
                 if (offset[1] > 0 && currentDate[2] == offset[2])
                     currentDate[1] = offset[1]
-                setDate(context, currentDate, popupView, offset, upperLimit)
+                setDate(context, currentDate, popupView, offset, upperLimit, motionDirection)
             }
         }
     }
@@ -212,7 +221,7 @@ object DateManager {
             val itemText = itemView.findViewById<TextView>(R.id.menu_item_text)
             itemText.typeface = ResourcesCompat.getFont(context, font)
             itemText.setTextColor(yearDropdownTextColor)
-            itemText.text = item.toString()
+            itemText.text = "$item"
             if (yearDropdownfontSize > 0)
                 itemText.textSize = yearDropdownfontSize
             itemView.setOnClickListener {
@@ -227,7 +236,7 @@ object DateManager {
                 } else if (currentDate[2] == offset[2] && currentDate[1] < offset[1]) {
                     currentDate[1] = offset[1]
                 }
-                setDate(context, currentDate, popupView, offset, upperLimit)
+                setDate(context, currentDate, popupView, offset, upperLimit, 0)
                 popupWindow.dismiss()
             }
             container.addView(itemView)
@@ -241,7 +250,8 @@ object DateManager {
         currentDate: List<Int>,
         popupView: View,
         offset: List<Int> = listOf(0, 0, -1),
-        upperLimit: String
+        upperLimit: String,
+        motionType: Int
     ) {
         val month: TextView = popupView.findViewById(R.id.month)
         val year: TextView = popupView.findViewById(R.id.year_text)
@@ -261,6 +271,38 @@ object DateManager {
             date,
             upperLimit
         )
+        if (motionType > MotionDirection.TO_TOP.ordinal) {
+            val screenWidth = context.resources.displayMetrics.widthPixels.toFloat()
+            val moveOut = ObjectAnimator.ofFloat(
+                calendarGridView,
+                "translationX",
+                0f,
+                screenWidth * if (motionType == MotionDirection.TO_LEFT.ordinal) -1 else 1
+            )
+            moveOut.duration = 300
+
+            val moveIn = ObjectAnimator.ofFloat(
+                calendarGridView,
+                "translationX",
+                screenWidth * if (motionType == MotionDirection.TO_LEFT.ordinal) 1 else -1,
+                0f
+            )
+            moveIn.duration = 300
+
+            AnimatorSet().apply {
+                playSequentially(moveOut, moveIn)
+                interpolator = AccelerateDecelerateInterpolator()
+                start()
+            }
+
+        } else {
+            val screenHeight = context.resources.displayMetrics.heightPixels.toFloat()
+            ObjectAnimator.ofFloat(calendarGridView, "translationY", screenHeight, 0f).apply {
+                duration = 500
+                start()
+                interpolator = DecelerateInterpolator()
+            }
+        }
     }
 
 }
