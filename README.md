@@ -1,6 +1,6 @@
 # Customizable Date Picker
 
-#### Latest version: 1.1
+#### Latest version: 1.2
 This is a fully customizable date picker component for Android that offers a variety of customization options and a simple API for displaying a date picker with a wide range of features.
 
 Please note that this library requires Java Version 11 at the least, and  
