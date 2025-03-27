@@ -8,7 +8,7 @@ Please note that this library requires Java Version 11 at the least, and
 minSdk = 28  //or above
 ```
 
-![Project Logo](./images/scr1.png)
+![Project Logo](./images/scr1.jpeg)
 
 ## Features
 
