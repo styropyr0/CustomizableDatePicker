@@ -287,7 +287,8 @@ fun show(
     displayView: View? = null, 
     offset: String = "0-0-0",
     upperLimit: String = today(), 
-    todo: () -> Unit = {} 
+    weekSelection: Boolean = false, 
+    dateSelectListener: OnDateSelectListener
 )
 ```
 
@@ -297,7 +298,8 @@ fun show(
 - **`displayView`**: A `TextView` or `Button` whose text will be updated with the selected date. If not provided, no view will be updated.
 - **`offset`**: A string that defines the offset for date selection. The format is `"dd-mm-yyyy"`. For example, `"0-0-5"` will show dates from 5 years ago.
 - **`upperLimit`**: The latest date a user can select, in the format `dd-MM-yyyy`. By default, this is today's date.
-- **`todo`**: An optional callback that will be called after a date is selected. This allows you to perform actions after the date is picked.
+- **`weekSelection`**: If `true`, the date picker will show in week selection mode.
+- **`dateSelectListener`**: A `OnDateSelectListener` that will be executed when a date is selected.
 
 #### Example:
 
