@@ -12,29 +12,28 @@
         android:layout_height="5dp"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"
-        android:background="@drawable/slider_bg"
-        />
+        android:background="@drawable/slider_bg" />
 
     <TextView
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textSize="18sp"
-        android:ellipsize="end"
-        android:visibility="gone"
         android:layout_marginTop="15dp"
+        android:ellipsize="end"
+        android:gravity="center"
         android:paddingVertical="5dp"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:visibility="gone" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="25dp"
         android:layout_marginTop="15dp"
         android:gravity="center"
-        android:layout_marginHorizontal="25dp"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -42,31 +41,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginRight="6dp"
-            android:paddingHorizontal="10dp"
-            android:paddingVertical="8dp"
-            android:minHeight="45dp"
             android:layout_weight="1"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:minHeight="45dp"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="8dp">
 
             <ImageView
                 android:id="@+id/month_prev"
                 android:layout_width="18dp"
                 android:layout_height="match_parent"
                 android:paddingVertical="7dp"
-                android:src="@drawable/ic_arrow_left"/>
+                android:src="@drawable/ic_arrow_left" />
 
             <TextView
                 android:id="@+id/month"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:layout_weight="1"
-                android:textStyle="bold"
-                android:textSize="16sp"
                 android:ellipsize="end"
+                android:gravity="center"
                 android:paddingVertical="5dp"
                 android:text="Month"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
 
             <ImageView
@@ -74,7 +73,7 @@
                 android:layout_width="18dp"
                 android:layout_height="match_parent"
                 android:paddingVertical="7dp"
-                android:src="@drawable/ic_arrow_right"/>
+                android:src="@drawable/ic_arrow_right" />
 
         </LinearLayout>
 
@@ -83,40 +82,41 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="6dp"
-            android:paddingHorizontal="10dp"
-            android:paddingVertical="8dp"
-            android:minHeight="45dp"
             android:layout_weight="1"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:minHeight="45dp"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="8dp">
 
             <TextView
                 android:id="@+id/year_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_weight="0.3"
-                android:textStyle="bold"
                 android:layout_marginLeft="12dp"
-                android:paddingVertical="5dp"
+                android:layout_weight="0.3"
                 android:ellipsize="end"
-                android:textSize="16sp"
+                android:gravity="center"
+                android:paddingVertical="5dp"
                 android:text="Year"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
 
             <ImageView
                 android:id="@+id/year_icon"
                 android:layout_width="match_parent"
-                android:layout_weight="0.8"
                 android:layout_height="match_parent"
-                android:paddingVertical="10dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="5dp"
-                android:src="@drawable/ic_arrow_down"/>
+                android:layout_weight="0.8"
+                android:paddingVertical="10dp"
+                android:src="@drawable/ic_arrow_down" />
 
         </LinearLayout>
 
     </LinearLayout>
+
     <GridView
         android:id="@+id/calendarHead"
         android:layout_width="wrap_content"
@@ -128,13 +128,14 @@
         android:stretchMode="columnWidth"
         android:verticalSpacing="3dp"
         tools:listitem="@layout/day" />
+
     <GridView
         android:id="@+id/calendar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="25dp"
-        android:background="#00FFFFFF"
         android:layout_marginTop="2dp"
+        android:background="#00FFFFFF"
         android:gravity="center"
         android:numColumns="7"
         android:stretchMode="columnWidth"
@@ -154,13 +155,12 @@
             android:id="@+id/choose_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/choose"
             android:gravity="center"
-            android:textSize="16sp"
+            android:text="Select"
             android:textAllCaps="false"
             android:textColor="@color/white"
-            android:textStyle="bold"
-            />
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 

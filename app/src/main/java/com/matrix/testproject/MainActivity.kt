@@ -1,5 +1,6 @@
 package com.matrix.testproject
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -23,17 +24,23 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     fun showDatePicker(v: View) {
         CustomCalendarResources.setCalendarDaysHighlightTextColor(Color.RED)
             .setDaysBarVisibility(View.VISIBLE)
             .setButtonDrawable(R.drawable.bg)
 
         val cv = CustomizableDatePicker()
-        cv.show(
-            this,
-            "20-10-2023"
-        ) {
-            (v as Button).text = cv.getSelectedDate()
+        cv.show(this, "20-10-2023") {
+            (v as Button).text = "Selected date: ${cv.getSelectedDate()}"
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    fun showWeekPicker(v: View) {
+        val cv = CustomizableDatePicker()
+        cv.show(this, "20-10-2023", weekSelection = true) {
+            (v as Button).text = "Selected week: ${cv.getSelectedWeek().joinToString(", ") { it }}"
         }
     }
 }

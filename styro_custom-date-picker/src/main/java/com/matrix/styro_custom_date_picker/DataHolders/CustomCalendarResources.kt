@@ -36,7 +36,7 @@ object CustomCalendarResources {
     internal var yearSwitchIcon = R.drawable.ic_arrow_down
     internal var gestureMonthSwitching = true
     internal var calendarFontSize: Float = 0f
-    internal var yearDropdownfontSize: Float = 0f
+    internal var yearDropdownFontSize: Float = 0f
     internal var selectorFontSize: Float = 0f
     internal var buttonFontSize: Float = 0f
     internal var datePickerTitleFontSize: Float = 0f
@@ -45,6 +45,7 @@ object CustomCalendarResources {
     internal var datePickerTitleColor = Color.BLACK
     internal var drawerColor = Color.parseColor("#C3DBD3D2")
     internal var drawerVisibility = View.VISIBLE
+    internal var weekSelection = false
 
     fun setCalendarDayHighlightBackground(backgroundDrawable: Int): CustomCalendarResources {
         dayHighlightBackground = backgroundDrawable
@@ -167,7 +168,7 @@ object CustomCalendarResources {
     }
 
     fun setYearDropdownFontSize(size: Float): CustomCalendarResources {
-        yearDropdownfontSize = size
+        yearDropdownFontSize = size
         return this
     }
 
@@ -211,4 +212,8 @@ object CustomCalendarResources {
         return this
     }
 
+    fun setWeekSelection(state: Boolean): CustomCalendarResources {
+        weekSelection = state
+        return this
+    }
 }

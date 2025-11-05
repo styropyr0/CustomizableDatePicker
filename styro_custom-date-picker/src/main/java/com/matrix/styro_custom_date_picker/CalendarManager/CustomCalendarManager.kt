@@ -1,4 +1,4 @@
-package com.matrix.styro_custom_date_picker.CalendarManager;
+package com.matrix.styro_custom_date_picker.CalendarManager
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
@@ -6,11 +6,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
-import android.view.animation.AnticipateInterpolator
-import android.view.animation.AnticipateOvershootInterpolator
-import android.view.animation.BounceInterpolator
 import android.view.animation.DecelerateInterpolator
-import android.view.animation.OvershootInterpolator
 import android.widget.GridView
 import android.widget.LinearLayout
 import android.widget.PopupWindow
@@ -23,7 +19,7 @@ import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.c
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.yearDropDownBackground
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.yearDropdownTextColor
 import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.font
-import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.yearDropdownfontSize
+import com.matrix.styro_custom_date_picker.DataHolders.CustomCalendarResources.yearDropdownFontSize
 import com.matrix.styro_custom_date_picker.Enums.MotionDirection
 import com.matrix.styro_custom_date_picker.R
 import java.text.SimpleDateFormat
@@ -37,14 +33,11 @@ import java.util.Locale
  * 20 Nov 2024
  * @author Saurav Sajeev
  **/
-
 internal class CalendarManager(
     private val month: TextView,
     private val year: TextView,
     private val date: String = DateManager.today(),
-    private val popupView: View,
-    private val offset: List<Int> = listOf(0, 0, 2000),
-    private val upperLimit: String = DateManager.today()
+    private val offset: List<Int> = listOf(0, 0, 2000)
 ) {
 
     fun setUp(): CalendarSet = generateDaysForMonth()
@@ -52,11 +45,12 @@ internal class CalendarManager(
     private fun generateDaysForMonth(): CalendarSet {
         val days = mutableListOf<String>()
         val date: List<Int> = getDateArray(date)
+        val monthDays: MutableList<List<Int>> = mutableListOf()
         SetDates.currentDate = date
         DateManager.offset = offset
         val calendar = Calendar.getInstance()
         calendar.set(date[2], date[1] - 1, 1)
-        val firstDayOfMonth = calendar.get(Calendar.DAY_OF_WEEK) - 1
+        val firstDayOfMonth = (calendar.get(Calendar.DAY_OF_WEEK) - 2).coerceIn(0, 6)
         var maxDaysInMonth = getDaysInMonth(date)
         var maxDaysPrevMonth = prevMonthDays(date)
 
@@ -72,16 +66,32 @@ internal class CalendarManager(
 
         for (i in 0 until firstDayOfMonth) {
             days.add("${maxDaysPrevMonth - (firstDayOfMonth - (i + 1))}")
+            monthDays.add(
+                listOf(
+                    maxDaysPrevMonth - (firstDayOfMonth - (i + 1)),
+                    if (date[1] == 1) 12 else date[1] - 1,
+                    if (date[1] == 1) date[2] - 1 else date[2]
+                )
+            )
         }
         for (i in 1..maxDaysInMonth) {
             days.add(i.toString())
+            monthDays.add(listOf(i, date[1], date[2]))
         }
 
         val limit = maxDaysInMonth + firstDayOfMonth
         for (i in 0 until if (limit > 35) 42 - limit else 35 - limit) {
             days.add("${i + 1}")
+            monthDays.add(
+                listOf(
+                    i + 1,
+                    if (date[1] == 12) 1 else date[1] + 1,
+                    if (date[1] == 12) date[2] + 1 else date[2]
+                )
+            )
         }
-        return CalendarSet(days, firstDayOfMonth, maxDaysInMonth, date, offset)
+
+        return CalendarSet(days, firstDayOfMonth, maxDaysInMonth, date, offset, monthDays)
     }
 
     private fun prevMonthDays(date: List<Int>): Int {
@@ -90,11 +100,19 @@ internal class CalendarManager(
     }
 
     private fun getDaysInMonth(date: List<Int>): Int {
-        val month = if (date[1] > 12) 1 else if (date[1] < 1) 12 else date[1]
-        val year = if (date[1] > 12) date[2] + 1 else if (date[1] < 1) date[2] - 1 else date[1]
+        val month = when {
+            date[1] > 12 -> 1
+            date[1] < 1 -> 12
+            else -> date[1]
+        }
+        val year = when {
+            date[1] > 12 -> date[2] + 1
+            date[1] < 1 -> date[2] - 1
+            else -> date[2]
+        }
+
         return YearMonth.of(year, month).lengthOfMonth()
     }
-
 }
 
 object DateManager {
@@ -103,9 +121,9 @@ object DateManager {
     private var upperLimit = today()
 
     /** Returns today's date */
-    fun today(): String {
+    fun today(pattern: String = "dd-MM-yyyy"): String {
         val calendar = Calendar.getInstance()
-        return SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()).format(calendar.time)
+        return SimpleDateFormat(pattern, Locale.getDefault()).format(calendar.time)
     }
 
     /**Formats a date based on the format specified
@@ -113,12 +131,12 @@ object DateManager {
      * @param currentFormat The current format of the date passed.
      * @param finalFormat The format to which the passed date needs to be converted to.**/
     fun formatDate(date: String, currentFormat: String, finalFormat: String): String {
-        try {
+        return try {
             val outputFormatter = DateTimeFormatter.ofPattern(finalFormat.trim())
             val inputFormatter = DateTimeFormatter.ofPattern(currentFormat.trim())
-            return LocalDate.parse(date, inputFormatter).format(outputFormatter)
+            LocalDate.parse(date, inputFormatter).format(outputFormatter)
         } catch (_: Exception) {
-            return date
+            date
         }
     }
 
@@ -174,7 +192,6 @@ object DateManager {
             if (currentDate[1] < offset[1] && offset[1] > 0 && currentDate[2] == offset[2])
                 currentDate[1] = today[1]
 
-            //restrict choosing future months
             if ((currentDate[2] == today[2] &&
                         currentDate[1] <= today[1]) ||
                 currentDate[2] < today[2]
@@ -216,19 +233,20 @@ object DateManager {
             Array(currentYear - if (offset[2] == 0) 2000 else offset[2] - 1) { currentYear - it }
 
         for (item in items) {
-            val itemView =
-                LayoutInflater.from(context).inflate(R.layout.dropdown_menu, container, false)
+            val itemView = LayoutInflater.from(context).inflate(R.layout.dropdown_menu, container, false)
+
             val itemText = itemView.findViewById<TextView>(R.id.menu_item_text)
             itemText.typeface = ResourcesCompat.getFont(context, font)
             itemText.setTextColor(yearDropdownTextColor)
             itemText.text = "$item"
-            if (yearDropdownfontSize > 0)
-                itemText.textSize = yearDropdownfontSize
+
+            if (yearDropdownFontSize > 0)
+                itemText.textSize = yearDropdownFontSize
+
             itemView.setOnClickListener {
                 popupView.findViewById<TextView>(R.id.year_text).text = itemText.text
                 currentDate[2] = Integer.valueOf(item)
 
-                //set the month to current highest when year is changed with a month higher than current month
                 if (currentDate[1] > getDateArray(upperLimit)[1] &&
                     currentDate[2] == getDateArray(upperLimit)[2]
                 ) {
@@ -257,12 +275,12 @@ object DateManager {
         val year: TextView = popupView.findViewById(R.id.year_text)
         val calendarGridView: GridView = popupView.findViewById(R.id.calendar)
 
-
         val date = LocalDate.parse(
-            "${currentDate[0]}-${currentDate[1]}-${currentDate[2]}",
-            DateTimeFormatter.ofPattern("d-M-yyyy")
-        ).format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
-        val calendarSet = CalendarManager(month, year, date, popupView, offset).setUp()
+                "${currentDate[0]}-${currentDate[1]}-${currentDate[2]}",
+                DateTimeFormatter.ofPattern("d-M-yyyy")
+            ).format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+
+        val calendarSet = CalendarManager(month, year, date, offset).setUp()
 
         calendarGridView.setBackgroundColor(calendarBackgroundColor)
         calendarGridView.adapter = CalendarAdapter(
