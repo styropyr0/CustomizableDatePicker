@@ -2,7 +2,7 @@
 
 #### Latest version: 1.2
 This is a fully customizable date picker component for Android that offers a variety of customization options and a simple API for displaying a date picker with a wide range of features.
-[](https://jitpack.io/#styropyr0/CustomizableDatePicker/Tag)
+[![](https://jitpack.io/v/styropyr0/CustomizableDatePicker.svg)](https://jitpack.io/#styropyr0/CustomizableDatePicker)
 
 Please note that this library requires Java Version 11 at the least, and  
 ```gradle
